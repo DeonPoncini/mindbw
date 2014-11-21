@@ -7,8 +7,7 @@ namespace db
 
 std::string operator_to_string(Operator op)
 {
-    switch (op)
-    {
+    switch (op) {
         case Operator::LT: return "<";
         case Operator::LTE: return "<=";
         case Operator::GT: return ">";
@@ -59,14 +58,12 @@ std::string DBAll()
 std::string DBList(const std::vector<std::string>& list)
 {
     std::string s;
-    if (list.empty())
-    {
+    if (list.empty()) {
         return s;
     }
 
     s += DBNull();
-    for (auto&& l : list)
-    {
+    for (auto&& l : list) {
         s += "," + DBEsc(l);
     }
     return s;
@@ -75,14 +72,12 @@ std::string DBList(const std::vector<std::string>& list)
 std::string DBKeyList(const std::vector<std::string>& list)
 {
     std::string s;
-    if (list.empty())
-    {
+    if (list.empty()) {
         return s;
     }
 
     s += DBNull();
-    for (auto&& l : list)
-    {
+    for (auto&& l : list) {
         s += "," + l;
     }
     return s;
@@ -95,14 +90,12 @@ std::string DBUnique(const std::string& s)
 
 std::string DBAnd(const std::vector<std::string>& list)
 {
-    if (list.empty())
-    {
+    if (list.empty()) {
         return "1";
     }
     std::string where = "(";
     where += list[0];
-    for (auto i = 1; i < list.size(); ++i)
-    {
+    for (auto i = 1; i < list.size(); ++i) {
         where += " AND " + list[i];
     }
     where += ")";
@@ -111,14 +104,12 @@ std::string DBAnd(const std::vector<std::string>& list)
 
 std::string DBOr(const std::vector<std::string>& list)
 {
-    if (list.empty())
-    {
+    if (list.empty()) {
         return "1";
     }
     std::string where = "(";
     where += list[0];
-    for (auto i = 1; i < list.size(); ++i)
-    {
+    for (auto i = 1; i < list.size(); ++i) {
         where += " OR " + list[i];
     }
     where += ")";
@@ -127,8 +118,7 @@ std::string DBOr(const std::vector<std::string>& list)
 
 SQLite3::SQLite3(const char* name)
 {
-    if (sqlite3_open(name,&mDB))
-    {
+    if (sqlite3_open(name,&mDB)) {
         throw std::runtime_error(std::string("Can't open database ") + name);
     }
 }
@@ -172,32 +162,24 @@ void SQLite3::del(const std::string& del, const std::string& where)
 void SQLite3::exec(const std::string& statement, DataMapFn f)
 {
     sqlite3_stmt* s;
-    if (sqlite3_prepare_v2(mDB,statement.c_str(),-1,&s,nullptr) == SQLITE_OK)
-    {
+    if (sqlite3_prepare_v2(mDB,statement.c_str(),-1,&s,nullptr) == SQLITE_OK) {
         auto cols = sqlite3_column_count(s);
-        while (true)
-        {
+        while (true) {
             auto result = sqlite3_step(s);
 
-            if (result == SQLITE_ROW)
-            {
+            if (result == SQLITE_ROW) {
                 SQLite3::DataMap ret;
-                for (auto i = 0; i < cols; ++i)
-                {
+                for (auto i = 0; i < cols; ++i) {
                     auto* data =
                         reinterpret_cast<const char*>(sqlite3_column_text(s,i));
                     ret.insert({sqlite3_column_name(s,i),data ? data : "NULL"});
                 }
                 f(ret);
-            }
-            else
-            {
+            } else {
                 break;
             }
         }
-    }
-    else
-    {
+    } else {
         throw std::runtime_error(sqlite3_errmsg(mDB));
     }
 }
