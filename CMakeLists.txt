@@ -1,15 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(libdb)
 
-################################
-# Compiler setup
-################################
-
-add_definitions(-Wall)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
-    "${CMAKE_SOURCE_DIR}/../cmake/modules/")
+set(DB_VERSION "0.0.1")
 
 ################################
 # Third party libraries
@@ -37,3 +29,15 @@ add_library(db SHARED
 
 target_link_libraries(db
     ${SQLITE3_LIBRARIES})
+
+################################
+# Export library
+################################
+
+export_project(
+    NAME libdb
+    INCLUDES ${CMAKE_CURRENT_LIST_DIR}/include
+    LIBS db
+    VERSION ${DB_VERSION}
+)
+
