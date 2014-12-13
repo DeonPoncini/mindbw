@@ -58,6 +58,10 @@ The return function gets called once per row, so if there were 10 results in
 the table the function would be called 10 times and print 20 rows of key value
 pairs.
 
+A helper script, sqlite3-execute is available under the scripts directory which
+can execute a .sql file and its commands within, to allow the user to preload
+the database by creating tables and inserting data.
+
 License
 -------
 Copyright (c) 2014 Deon Poncini.
