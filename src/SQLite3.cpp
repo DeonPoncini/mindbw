@@ -1,8 +1,8 @@
-#include "SQLite3.h"
+#include <mindbw/SQLite3.h>
 
 #include <stdexcept>
 
-namespace db
+namespace mindbw
 {
 
 std::string operator_to_string(Operator op)

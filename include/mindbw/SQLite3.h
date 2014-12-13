@@ -1,5 +1,5 @@
-#ifndef DB_SQLITE3_H
-#define DB_SQLITE3_H
+#ifndef MINDBW_SQLITE3_H
+#define MINDBW_SQLITE3_H
 
 #include <sqlite3.h>
 
@@ -8,7 +8,7 @@
 #include <unordered_map>
 #include <vector>
 
-namespace db
+namespace mindbw
 {
 
 enum class Operator
@@ -41,7 +41,6 @@ typedef std::function<void(DataMap)> DataMapFn;
 class SQLite3
 {
 public:
-
     explicit SQLite3(const char* name);
     SQLite3(const SQLite3&) = delete;
     SQLite3(SQLite3&&) = delete;
