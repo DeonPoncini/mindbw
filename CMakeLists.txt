@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(mindbwrapper)
+project(mindbw)
 
 set(DB_VERSION "0.0.1")
 
@@ -23,11 +23,11 @@ include_directories(include/db)
 # Build targets
 ################################
 
-add_library(mindbwrapper SHARED
+add_library(mindbw SHARED
     ${SRC}
     ${INCLUDES})
 
-target_link_libraries(mindbwrapper
+target_link_libraries(mindbw
     ${SQLITE3_LIBRARIES})
 
 ################################
@@ -35,9 +35,9 @@ target_link_libraries(mindbwrapper
 ################################
 
 export_project(
-    NAME mindbwrapper
+    NAME mindbw
     INCLUDES ${CMAKE_CURRENT_LIST_DIR}/include
-    LIBS mindbwrapper
+    LIBS mindbw
     VERSION ${DB_VERSION}
 )
 
