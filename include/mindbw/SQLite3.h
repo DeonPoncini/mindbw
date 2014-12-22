@@ -41,6 +41,7 @@ typedef std::function<void(DataMap)> DataMapFn;
 class SQLite3
 {
 public:
+    explicit SQLite3(const std::string& name);
     explicit SQLite3(const char* name);
     SQLite3(const SQLite3&) = delete;
     SQLite3(SQLite3&&) = delete;

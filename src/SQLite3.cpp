@@ -122,6 +122,11 @@ std::string Or(const std::vector<std::string>& list)
     return where;
 }
 
+SQLite3::SQLite3(const std::string& name) :
+    SQLite3(name.c_str())
+{
+}
+
 SQLite3::SQLite3(const char* name)
 {
     if (sqlite3_open(name,&mDB)) {
