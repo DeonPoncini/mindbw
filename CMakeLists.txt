@@ -22,7 +22,7 @@ include_directories(include)
 # Build targets
 ################################
 
-add_library(mindbw SHARED
+add_library(mindbw
     ${SRC}
     ${INCLUDES})
 
