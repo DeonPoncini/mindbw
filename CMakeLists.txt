@@ -8,7 +8,10 @@ set(DB_VERSION "0.0.1")
 ################################
 find_package(SQLite3 REQUIRED)
 
+find_package(zephyr)
+
 include_directories(${SQLITE3_INCLUDE_DIR})
+include_directories(${ZEPHYR_INCLUDE_DIRS})
 
 ################################
 # Locate source
@@ -27,7 +30,8 @@ add_library(mindbw
     ${INCLUDES})
 
 target_link_libraries(mindbw
-    ${SQLITE3_LIBRARIES})
+    ${SQLITE3_LIBRARIES}
+    ${ZEPHYR_LIBRARIES})
 
 ################################
 # Export library

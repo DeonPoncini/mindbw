@@ -1,12 +1,12 @@
 #ifndef MINDBW_SQLITE3_H
 #define MINDBW_SQLITE3_H
 
-#include <sqlite3.h>
-
 #include <functional>
 #include <string>
 #include <unordered_map>
 #include <vector>
+
+struct sqlite3;
 
 namespace mindbw
 {

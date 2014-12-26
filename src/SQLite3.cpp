@@ -1,6 +1,10 @@
 #include <mindbw/SQLite3.h>
 
+#include <sqlite3.h>
+
 #include <stdexcept>
+
+#include <zephyr/to_string.h>
 
 namespace mindbw
 {
@@ -152,7 +156,7 @@ std::string SQLite3::insert(const std::string& insert, const std::string& values
     std::string sql("INSERT INTO ");
     sql += insert + " VALUES(" + values + ")";
     exec(sql);
-    return std::to_string(sqlite3_last_insert_rowid(mDB));
+    return zephyr::to_string(sqlite3_last_insert_rowid(mDB));
 }
 
 void SQLite3::update(const std::string& update, const std::string& set,
