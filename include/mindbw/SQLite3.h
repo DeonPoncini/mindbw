@@ -6,20 +6,12 @@
 #include <unordered_map>
 #include <vector>
 
+#include "Types.h"
+
 struct sqlite3;
 
 namespace mindbw
 {
-
-enum class Operator
-{
-    LT,
-    LTE,
-    GT,
-    GTE,
-    EQ,
-    NEQ,
-};
 
 std::string Compare(const std::string& key, const std::string& value,
         Operator op);
