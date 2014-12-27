@@ -1,10 +1,11 @@
 #ifndef MINDBW_TYPES_H
 #define MINDBW_TYPES_H
 
-namespace mindbw
-{
+#include <zephyr/CExport.h>
 
-enum class Operator
+Z_NS_START(mindbw)
+
+Z_ENUM_CLASS(mindbw, Operator)
 {
     LT,
     LTE,
@@ -15,6 +16,6 @@ enum class Operator
 };
 
 
-}
+Z_NS_END
 
 #endif
