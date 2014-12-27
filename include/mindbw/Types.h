@@ -5,14 +5,14 @@
 
 Z_NS_START(mindbw)
 
-Z_ENUM_CLASS(mindbw, Operator)
+Z_ENUM_CLASS ZD(mindbw)Operator
 {
-    LT,
-    LTE,
-    GT,
-    GTE,
-    EQ,
-    NEQ,
+    ZD(mindbw)LT,
+    ZD(mindbw)LTE,
+    ZD(mindbw)GT,
+    ZD(mindbw)GTE,
+    ZD(mindbw)EQ,
+    ZD(mindbw)NEQ,
 };
 
 
