@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "Types.h"
+#include <mindbw/cpp/DataTypes.h>
 
 struct sqlite3;
 

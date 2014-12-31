@@ -1,0 +1,15 @@
+<data name="DataTypes">
+    <package uri="sectorsoftware.net">
+        <namespace>mindbw</namespace>
+    </package>
+
+    <enum name="Operator">
+        <entry>LT</entry>
+        <entry>LTE</entry>
+        <entry>GT</entry>
+        <entry>GTE</entry>
+        <entry>EQ</entry>
+        <entry>NEQ</entry>
+    </enum>
+
+</data>
