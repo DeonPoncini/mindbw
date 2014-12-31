@@ -35,17 +35,12 @@ target_link_libraries(mindbw
     ${SQLITE3_LIBRARIES}
     ${ZEPHYR_LIBRARIES})
 
-make_directory(${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/cpp)
-make_directory(${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/c)
-make_directory(${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/java)
-
 add_custom_command(OUTPUT
     ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/cpp/DataTypes.h
     COMMAND python
     ARGS $ENV{PROJECT_SCRIPT_DIR}/include/generate-data.py
     ${CMAKE_CURRENT_LIST_DIR}/xml/data.xml
     ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw)
-
 
 ################################
 # Export library
