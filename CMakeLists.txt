@@ -55,5 +55,5 @@ export_project(
 
 export_java_project(
     NAME mindbw-java
-    JAR_PATHS ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/java
+    INCLUDES ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/java
 )
