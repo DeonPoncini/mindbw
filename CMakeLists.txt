@@ -8,8 +8,10 @@ set(DB_VERSION "0.0.1")
 ################################
 find_package(SQLite3 REQUIRED)
 
+find_package(kizhi)
 find_package(zephyr)
 
+include_directories(${KIZHI_INCLUDE_DIRS})
 include_directories(${SQLITE3_INCLUDE_DIR})
 include_directories(${ZEPHYR_INCLUDE_DIRS})
 
@@ -32,6 +34,7 @@ add_library(mindbw
     ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/cpp/DataTypes.h)
 
 target_link_libraries(mindbw
+    ${KIZHI_LIBRARIES}
     ${SQLITE3_LIBRARIES}
     ${ZEPHYR_LIBRARIES})
 

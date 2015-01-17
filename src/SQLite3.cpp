@@ -4,6 +4,7 @@
 
 #include <stdexcept>
 
+#include <kizhi/Log.h>
 #include <zephyr/to_string.h>
 
 namespace mindbw
@@ -134,6 +135,7 @@ SQLite3::SQLite3(const std::string& name) :
 SQLite3::SQLite3(const char* name)
 {
     if (sqlite3_open(name,&mDB)) {
+        KIZHI_FATAL_T("SQLite3") << "Cannot open database: " << name;
         throw std::runtime_error(std::string("Can't open database ") + name);
     }
 }
@@ -176,6 +178,7 @@ void SQLite3::del(const std::string& del, const std::string& where)
 
 void SQLite3::exec(const std::string& statement, const DataMapFn& f)
 {
+    KIZHI_TRACE_T("SQLite3") << statement;
     sqlite3_stmt* s;
     if (sqlite3_prepare_v2(mDB,statement.c_str(),-1,&s,nullptr) == SQLITE_OK) {
         auto cols = sqlite3_column_count(s);
@@ -187,7 +190,10 @@ void SQLite3::exec(const std::string& statement, const DataMapFn& f)
                 for (auto i = 0; i < cols; ++i) {
                     auto* data =
                         reinterpret_cast<const char*>(sqlite3_column_text(s,i));
-                    ret.insert({sqlite3_column_name(s,i),data ? data : "NULL"});
+                    auto col = sqlite3_column_name(s, i);
+                    auto d = data ? data : "NULL";
+                    KIZHI_TRACE_T("SQLite3") << col << "->" << d;
+                    ret.insert({col,d});
                 }
                 f(ret);
             } else {
