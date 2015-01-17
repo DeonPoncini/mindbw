@@ -48,10 +48,12 @@ add_custom_command(OUTPUT
 ################################
 # Export library
 ################################
+set(MINDBW_INCLUDES
+    ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include)
 
 export_project(
     NAME mindbw
-    INCLUDES ${CMAKE_CURRENT_LIST_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include
+    INCLUDES ${MINDBW_INCLUDES}
     LIBS mindbw
     VERSION ${DB_VERSION}
 )
@@ -60,3 +62,18 @@ export_java_project(
     NAME mindbw-java
     INCLUDES ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/java
 )
+
+################################
+# Unit tests
+################################
+add_unit_tests(NAME mindbw
+    INCLUDES ${MINDBW_INCLUDES})
+
+add_custom_target(mindbw-test-copy
+    rm -f ${CMAKE_CURRENT_BINARY_DIR}/test/test.db
+    COMMAND ${CMAKE_CURRENT_LIST_DIR}/scripts/sqlite3-execute
+    ${CMAKE_CURRENT_BINARY_DIR}/test/test.db
+    ${CMAKE_CURRENT_LIST_DIR}/test/schema.sql
+)
+add_dependencies(mindbw-test mindbw-test-copy)
+
