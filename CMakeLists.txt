@@ -58,9 +58,10 @@ export_project(
     VERSION ${DB_VERSION}
 )
 
-export_java_project(
+export_project(
     NAME mindbw-java
     INCLUDES ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/java
+    VERSION ${DB_VERSION}
 )
 
 ################################
