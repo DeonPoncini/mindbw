@@ -16,6 +16,7 @@ namespace mindbw
 std::string Compare(const std::string& key, const std::string& value,
         Operator op);
 std::string Equal(const std::string& key, const std::string& value);
+std::string Let(const std::string& key, const std::string& value);
 std::string Like(const std::string& key, const std::string& value);
 std::string Null();
 std::string True();

@@ -19,6 +19,7 @@ std::string operator_to_string(Operator op)
         case Operator::GTE: return ">=";
         case Operator::EQ: return "=";
         case Operator::NEQ: return "!=";
+        case Operator::LET: return "=";
     }
 }
 
@@ -39,6 +40,11 @@ std::string Compare(const std::string& key, const std::string& value,
 std::string Equal(const std::string& key, const std::string& value)
 {
     return Compare(key, value, Operator::EQ);
+}
+
+std::string Let(const std::string& key, const std::string& value)
+{
+    return Compare(key, value, Operator::LET);
 }
 
 std::string Like(const std::string& key, const std::string& value)

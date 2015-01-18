@@ -31,7 +31,8 @@ BOOST_AUTO_TEST_CASE(Insert)
 
 BOOST_AUTO_TEST_CASE(Update)
 {
-    sqlite3.update("test", "value = 200", mindbw::Equal("name", "TestName"));
+    sqlite3.update("test", mindbw::Let("value", "200"),
+            mindbw::Equal("name", "TestName"));
     auto selCount = 0;
     sqlite3.select(mindbw::KeyList({"name", "value"}), "test",
             mindbw::Equal("name","TestName"),

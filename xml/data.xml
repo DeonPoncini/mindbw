@@ -10,6 +10,7 @@
         <entry>GTE</entry>
         <entry>EQ</entry>
         <entry>NEQ</entry>
+        <entry>LET</entry>
     </enum>
 
 </data>
