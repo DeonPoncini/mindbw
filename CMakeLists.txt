@@ -66,8 +66,7 @@ export_java_project(
 ################################
 # Unit tests
 ################################
-add_unit_tests(NAME mindbw
-    INCLUDES ${MINDBW_INCLUDES})
+add_unit_tests(NAME mindbw)
 
 add_custom_target(mindbw-test-copy
     rm -f ${CMAKE_CURRENT_BINARY_DIR}/test/test.db
