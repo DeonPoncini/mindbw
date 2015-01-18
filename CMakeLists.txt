@@ -54,13 +54,8 @@ set(MINDBW_INCLUDES
 export_project(
     NAME mindbw
     INCLUDES ${MINDBW_INCLUDES}
+    JAVA_INCLUDES ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/java
     LIBS mindbw
-    VERSION ${DB_VERSION}
-)
-
-export_project(
-    NAME mindbw-java
-    INCLUDES ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/java
     VERSION ${DB_VERSION}
 )
 
