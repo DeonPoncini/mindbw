@@ -141,14 +141,29 @@ SQLite3::SQLite3(const std::string& name) :
 SQLite3::SQLite3(const char* name)
 {
     if (sqlite3_open(name,&mDB)) {
-        KIZHI_FATAL_T("SQLite3") << "Cannot open database: " << name;
+        KIZHI_FATAL_T("SQLite3") << "Cannot open database: " << name
+            << " : " << sqlite3_errmsg(mDB);
         throw std::runtime_error(std::string("Can't open database ") + name);
     }
+    KIZHI_TRACE_T("SQLite3") << "Opening database " << mDB;
 }
 
 SQLite3::~SQLite3()
 {
-    sqlite3_close(mDB);
+    KIZHI_TRACE_T("SQLite3") << "Closing database " << mDB;
+    auto rc = sqlite3_close(mDB);
+    if(rc == SQLITE_BUSY) {
+        KIZHI_ERROR_T("SQLite3") << "Database closing failed! " << mDB;
+        sqlite3_stmt* s;
+        while((s = sqlite3_next_stmt(mDB, nullptr)) != nullptr) {
+            sqlite3_finalize(s);
+        }
+        rc = sqlite3_close(mDB);
+        if (rc != SQLITE_OK) {
+            KIZHI_FATAL_T("SQLite3") << "Unable to finalize database! " << mDB;
+        }
+    }
+
 }
 
 void SQLite3::select(const std::string& select, const std::string& from,
@@ -205,6 +220,10 @@ void SQLite3::exec(const std::string& statement, const DataMapFn& f)
             } else {
                 break;
             }
+        }
+        // cleanup
+        if (s != nullptr) {
+            sqlite3_finalize(s);
         }
     } else {
         throw std::runtime_error(sqlite3_errmsg(mDB));
