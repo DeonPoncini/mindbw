@@ -57,6 +57,7 @@ export_project(
     JAVA_INCLUDES ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/java
     PYTHON_INCLUDES ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw/python
     LIBS mindbw
+    PATH ${CMAKE_CURRENT_LIST_DIR}/scripts
     VERSION ${DB_VERSION}
 )
 
