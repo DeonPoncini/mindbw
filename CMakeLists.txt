@@ -44,7 +44,8 @@ add_custom_command(OUTPUT
     COMMAND python
     ARGS ${SINC_PYTHON_INCLUDE_DIRS}/sinc.py
     ${CMAKE_CURRENT_LIST_DIR}/xml/data.xml
-    ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw)
+    ${CMAKE_CURRENT_BINARY_DIR}/include/mindbw
+    ${SINC_DATA}/schema.xsd)
 
 ################################
 # Export library
